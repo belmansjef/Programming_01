@@ -1,0 +1,3 @@
+﻿  Game.cpp
+C:\Users\watwa\Downloads\1DAE21_02_Jef_Belmans\StaticDrawing\Game.cpp(15,20): error C2220: the following warning is treated as an error
+C:\Users\watwa\Downloads\1DAE21_02_Jef_Belmans\StaticDrawing\Game.cpp(15,20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
