@@ -4,7 +4,7 @@ using namespace utils;
 std::string g_WindowTitle{ "SDL & OpenGL - Belmans, Jef - 1DAE21" };
 
 float g_WindowWidth{ 1024.0f };
-float g_WindowHeight{ 576.0f };
+float g_WindowHeight{ 400.0f };
 #pragma endregion gameInformation
 
 
