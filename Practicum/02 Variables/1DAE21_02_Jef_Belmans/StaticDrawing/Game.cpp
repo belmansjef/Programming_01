@@ -7,7 +7,8 @@
 void Start()
 {
 	// initialize game resources here
-	float x{};
+	CalculateColorBandRatios((g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
+	GenerateColorBandColors();
 }
 
 void Draw()
@@ -17,6 +18,7 @@ void Draw()
 	DrawHouse(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
 	DrawFlag(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 1.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
 	DrawCheckerPattern(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 0.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
+	DrawColorBand(Point2f((g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), g_ColorbandWidth);
 }
 
 void Update(float elapsedSec)
@@ -154,6 +156,21 @@ void DrawCheckerPattern(Point2f pos, float width, float height)
 
 void DrawColorBand(Point2f pos, float width)
 {
+	float rectWidth{ width / g_NumColorBands };
+
+	// Yellow border
+	utils::SetColor(g_ColorYellow);
+	utils::DrawRect(pos, width, rectWidth * 4.0f, 4.0f);
+
+	// Individual color bands
+	for (int i = 0; i < g_NumColorBands; i++)
+	{
+		SetColor(g_ColorBandColors[i]);
+		FillRect(Point2f(pos.x + (i * rectWidth), pos.y), rectWidth, rectWidth * 4.0f);
+	}
+	
+	SetColor(g_ColorBlackTransparent);
+	FillRect(pos, width, rectWidth * 2.0f);
 }
 
 void DrawPentagram(Point2f center, float radius)
@@ -162,5 +179,28 @@ void DrawPentagram(Point2f center, float radius)
 
 void DrawColumnChart(Point2f pos, float colWidth, float percentages[])
 {
+}
+
+void CalculateColorBandRatios(float maxWidth, float maxHeight)
+{
+	float currentWidth{ maxWidth };
+	
+	// While the calculated height exceeds the max allowed height
+	while ((currentWidth / g_NumColorBands) * 4.0f > maxHeight)
+	{
+		--currentWidth;
+	}
+
+
+	g_ColorbandWidth = currentWidth;
+	std::cout << "Max width: " << maxWidth << " Current width: " << currentWidth << std::endl;
+}
+
+void GenerateColorBandColors()
+{
+	for (int i = 0; i < g_NumColorBands; i++)
+	{
+		g_ColorBandColors[i] = Color4f( (rand() % 101) / 100.0f, (rand() % 101) / 100.0f, (rand() % 101) / 100.0f, 1.0f );
+	}
 }
 #pragma endregion ownDefinitions
