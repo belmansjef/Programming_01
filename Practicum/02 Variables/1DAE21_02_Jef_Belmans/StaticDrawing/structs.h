@@ -19,9 +19,14 @@ struct Point2f
 
 	float x;
 	float y;
+
+	Point2f& operator *(const float& a)
+	{
+		x *= a;
+		y *= a;
+		return* this;
+	}
 };
-
-
 
 struct Rectf
 {

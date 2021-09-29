@@ -9,16 +9,20 @@ void Start()
 	// initialize game resources here
 	CalculateColorBandRatios((g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
 	GenerateColorBandColors();
+	CalculatePentagramVerts();
+	// GetColumnChartInput();
 }
 
 void Draw()
 {
 	ClearBackground(0.3f, 0.0f, 0.3f);
 
-	DrawHouse(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
-	DrawFlag(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 1.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
-	DrawCheckerPattern(Point2f(static_cast<float>(g_CellPadding), ((g_WindowHeight / 3.0f) * 0.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
-	DrawColorBand(Point2f((g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), g_ColorbandWidth);
+	DrawHouse(Point2f(0.0f * (g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
+	DrawFlag(Point2f(0.0f * (g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 1.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
+	DrawCheckerPattern(Point2f(0.0f * (g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 0.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding));
+	DrawColorBand(Point2f( 1.0f * (g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 2.0f) + g_CellPadding), g_ColorbandWidth);
+	DrawPentagram(Point2f( 1.0f * (g_WindowWidth / 2.0f) + g_CellPadding + (g_WindowWidth / 2.0f) / 2.0f, ((g_WindowHeight / 3.0f) * 1.0f) + g_CellPadding + (g_WindowHeight / 3.0f) / 2.0f));
+	DrawColumnChart(Point2f( 1.0f * (g_WindowWidth / 2.0f) + g_CellPadding, ((g_WindowHeight / 3.0f) * 0.0f) + g_CellPadding), (g_WindowWidth / 2.0f) - (2.0f * g_CellPadding), (g_WindowHeight / 3.0f) - (2.0f * g_CellPadding), g_ColumnChartPercentages);
 }
 
 void Update(float elapsedSec)
@@ -173,12 +177,45 @@ void DrawColorBand(Point2f pos, float width)
 	FillRect(pos, width, rectWidth * 2.0f);
 }
 
-void DrawPentagram(Point2f center, float radius)
+void DrawPentagram(Point2f center)
 {
+	SetColor(g_ColorBlack);
+	for (int i = 0; i < 5; i++)
+	{
+		Point2f p1{ g_PentagramVerts[(i * 2) % 5].x + center.x, g_PentagramVerts[(i * 2) % 5].y + center.y };
+		Point2f p2{ g_PentagramVerts[((i + 1) * 2) % 5].x + center.x, g_PentagramVerts[((i + 1) * 2) % 5].y + center.y };
+		DrawLine(p1, p2, 2.0f);
+	}
 }
 
-void DrawColumnChart(Point2f pos, float colWidth, float percentages[])
+void DrawColumnChart(Point2f pos, float width, float height, float percentages[])
 {
+	float colWidth{ width / 4.0f };
+	Color4f lightGreen{155.0f / 255.0f, 245.0f / 255.0f, 37.0f / 255.0f, 1.0f};
+	Color4f darkGreen{101.0f / 255.0f, 168.0f / 255.0f, 13.0f / 255.0f, 1.0f};
+	
+	for (int i = 0; i < sizeof(percentages); i++)
+	{
+		SetColor(i % 2 == 0 ? darkGreen : lightGreen);
+		FillRect(pos.x + i * colWidth, pos.y, colWidth, height * (percentages[i] / 100.0f));
+	}
+}
+
+void GetColumnChartInput()
+{
+	std::cout << "% people playing games\n";
+
+	std::cout << "In the range [0, 20]? ";
+	std::cin >> g_ColumnChartPercentages[0];
+
+	std::cout << "In the range [21, 40]? ";
+	std::cin >> g_ColumnChartPercentages[1];
+
+	std::cout << "In the range [41, 60]? ";
+	std::cin >> g_ColumnChartPercentages[2];
+
+	std::cout << "Older than 60? ";
+	std::cin >> g_ColumnChartPercentages[3];
 }
 
 void CalculateColorBandRatios(float maxWidth, float maxHeight)
@@ -201,6 +238,15 @@ void GenerateColorBandColors()
 	for (int i = 0; i < g_NumColorBands; i++)
 	{
 		g_ColorBandColors[i] = Color4f( (rand() % 101) / 100.0f, (rand() % 101) / 100.0f, (rand() % 101) / 100.0f, 1.0f );
+	}
+}
+
+void CalculatePentagramVerts()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		g_PentagramVerts[i] = Point2f(cosf(((2.0f * static_cast<float>(M_PI)) / 5.0f) * i), sinf(((2.0f * static_cast<float>(M_PI)) / 5.0f) * i)) * g_PentagramRadius;
+		std::cout << "Pentagram vert " << i << " (x,y): (" << g_PentagramVerts[i].x << "," << g_PentagramVerts[i].y << ")\n";
 	}
 }
 #pragma endregion ownDefinitions

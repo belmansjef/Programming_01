@@ -7,8 +7,8 @@ std::string g_WindowTitle{ "StaticDrawing - Belmans, Jef - 1DAE21" };
 // Change the window dimensions here
 // float g_WindowWidth{ 1024 };
 // float g_WindowHeight{ 576 };
-float g_WindowWidth{ 1000 };
-float g_WindowHeight{ 700 };
+float g_WindowWidth{ 1024 };
+float g_WindowHeight{ 576 };
 #pragma endregion gameInformation
 
 
@@ -17,9 +17,15 @@ float g_WindowHeight{ 700 };
 const int g_CellPadding{ 20 };
 const int g_CheckerRows{ 3 };
 const int g_CheckerCollumns{ 3 };
-const int g_NumColorBands{ 9 };
 
+const int g_NumColorBands{ 9 };
 float g_ColorbandWidth{ 0.0f };
+Color4f g_ColorBandColors[g_NumColorBands];
+
+const float g_PentagramRadius{ 80.0f };
+Point2f g_PentagramVerts[5]{};
+
+float g_ColumnChartPercentages[4]{ 60.0f, 25.0f, 15.0f, 10.0f};
 
 const Color4f g_ColorRed{ 1.0f, 0.0f, 0.0f, 1.0f };
 const Color4f g_ColorGreen{ 0.0f, 1.0f, 0.0f, 1.0f };
@@ -31,16 +37,17 @@ const Color4f g_ColorWhite{ 1.0f, 1.0f, 1.0f, 1.0f };
 const Color4f g_ColorBlack{ 0.0f, 0.0f, 0.0f, 1.0f };
 const Color4f g_ColorGray{ 0.3f, 0.3f, 0.3f, 1.0f };
 const Color4f g_ColorBlackTransparent{ 0.0f, 0.0f, 0.0f, 0.45f };
-Color4f g_ColorBandColors[g_NumColorBands];
 
 void DrawHouse(Point2f pos, float width, float height);
 void DrawFlag(Point2f pos, float width, float height);
 void DrawCheckerPattern(Point2f pos, float width, float height);
 void DrawColorBand(Point2f pos, float width);
-void DrawPentagram(Point2f center, float radius);
-void DrawColumnChart(Point2f pos, float colWidth, float percentages[]);
+void DrawPentagram(Point2f center);
+void DrawColumnChart(Point2f pos, float width, float height, float percentages[]);
 void CalculateColorBandRatios(float maxWidth, float maxHeight);
 void GenerateColorBandColors();
+void CalculatePentagramVerts();
+void GetColumnChartInput();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
