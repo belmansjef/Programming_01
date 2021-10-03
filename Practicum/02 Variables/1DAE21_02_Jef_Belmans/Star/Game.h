@@ -14,6 +14,8 @@ float g_WindowHeight{ 500.0f };
 #pragma region ownDeclarations
 float g_Radius{ 200.0f };
 
+Point2f g_Verts[16];
+
 void DrawStar();
 void CalculateVerts();
 #pragma endregion ownDeclarations
