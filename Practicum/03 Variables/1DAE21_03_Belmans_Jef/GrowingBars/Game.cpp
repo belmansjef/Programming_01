@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Game.h"
+#include <iostream>
 
 //Basic game functions
 #pragma region gameFunctions											
@@ -57,7 +58,9 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 #pragma region ownDefinitions
 void DrawRedBar()
 {
-	float barProgress{ static_cast<float>((g_NrFrames / 30 * 15) % static_cast<int>(g_BarDimensions.x)) };
+	float barProgress{ static_cast<float>((g_NrFrames / 30 * pixelStep) % static_cast<int>(g_BarDimensions.x)) };
+	// float redValue{ (120.0f + static_cast<float>((g_NrFrames / 30 * static_cast<int>(colorStep)) % 135 - static_cast<int>(colorStep))) / 255.0f };
+	// std::cout << redValue << std::endl;
 
 	Point2f p1
 	(
