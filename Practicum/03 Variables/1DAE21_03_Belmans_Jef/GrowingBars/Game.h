@@ -17,8 +17,6 @@ int g_NrFrames{};
 const Point2f g_PaddedWindowDimensions{ g_WindowWidth - (2.0f * g_Padding), g_WindowHeight - (2.0f * g_Padding) };
 const Point2f g_BarDimensions{ g_PaddedWindowDimensions.x, g_PaddedWindowDimensions.y / 3.0f };
 
-const float colorStep{ (135.0f / g_BarDimensions.x) * pixelStep };
-
 void DrawRedBar();
 void DrawYellowBar();
 void UpdateFrameCount();

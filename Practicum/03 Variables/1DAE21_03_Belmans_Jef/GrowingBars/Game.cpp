@@ -59,7 +59,7 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 void DrawRedBar()
 {
 	float barProgress{ static_cast<float>((g_NrFrames / 30 * pixelStep) % static_cast<int>(g_BarDimensions.x)) };
-	// float redValue{ (120.0f + static_cast<float>((g_NrFrames / 30 * static_cast<int>(colorStep)) % 135 - static_cast<int>(colorStep))) / 255.0f };
+	float redValue{ (120.0f + (135 * (barProgress / g_BarDimensions.x))) / 255.0f };
 	// std::cout << redValue << std::endl;
 
 	Point2f p1
@@ -72,7 +72,7 @@ void DrawRedBar()
 	SetColor(1.0f, 1.0f, 1.0f);
 	DrawRect(p1, g_BarDimensions.x, g_BarDimensions.y, 2.0f);
 	
-	SetColor(1.0f, 0.0f, 0.0f);
+	SetColor(redValue, 0.0f, 0.0f);
 	FillRect(p1, barProgress, g_BarDimensions.y);
 }
 
