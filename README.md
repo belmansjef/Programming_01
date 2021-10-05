@@ -1,2 +1,2 @@
 # Programming_1
- Repo for programming 1
+Just some DAE student's Programing 01 repository
