@@ -13,12 +13,9 @@ float g_WindowHeight{ 500 };
 
 
 #pragma region ownDeclarations
-const float g_PointerLength{ 200.0f };
-const float g_FramesPerRotation{ 240.0f };
-const float g_AnglePerFrameDeg{ 360.0f / g_FramesPerRotation };
-const float g_AnglePerFrameRad{ g_AnglePerFrameDeg * ( g_Pi / 180.0f) };
+const float g_FramesPerRotationMinutePointer{ 240.0f };
 
-int g_NrFrames{};
+unsigned int g_NrFrames{};
 
 void DrawPointers();
 #pragma endregion ownDeclarations
