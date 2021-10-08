@@ -14,10 +14,12 @@ float g_WindowHeight{ 576 };
 
 #pragma region ownDeclarations
 bool g_IsCharging{ false };
+bool g_IsFullyCharged{};
 unsigned int g_NrFrames{};
 unsigned int g_ChargeTimer{};
 
-Point2f mousePos{};
+
+Point2f g_MousePos{};
 
 void ChargeShot();
 #pragma endregion ownDeclarations

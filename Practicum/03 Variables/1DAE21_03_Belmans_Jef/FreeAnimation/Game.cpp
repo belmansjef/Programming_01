@@ -37,8 +37,8 @@ void OnKeyUpEvent(SDL_Keycode key)
 
 void OnMouseMotionEvent(const SDL_MouseMotionEvent& e)
 {
-	mousePos.x = float(e.x);
-	mousePos.y = float(g_WindowHeight - e.y);
+	g_MousePos.x = float(e.x);
+	g_MousePos.y = float(g_WindowHeight - e.y);
 }
 
 void OnMouseDownEvent(const SDL_MouseButtonEvent& e)
@@ -60,7 +60,7 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 	switch (e.button)
 	{
 		case SDL_BUTTON_RIGHT:
-			g_IsCharging = false;
+			g_IsCharging = g_IsFullyCharged = false;
 			g_ChargeTimer = 0;
 			break;
 		default:
@@ -72,26 +72,26 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 #pragma region ownDefinitions
 void ChargeShot()
 {
-	float angleOutlineEllipse{ (g_ChargeTimer % 360) * (g_Pi / 180.0f) };
-	float angleFilledEllipse{ ((90 + g_ChargeTimer) % 360) * (g_Pi / 180.0f) };
-	float bigSine{ sinf( angleOutlineEllipse ) + 1.0f };
-	float smallSine{ sinf( angleOutlineEllipse + angleFilledEllipse) + 2.0f };
-	float combinedSine = bigSine * smallSine;
+	const float radius{ 25.0f };
+	const float angle{ (270 + g_ChargeTimer) % 360 * (g_Pi / 180.0f) };
 
-	float sineFilledEllipse{ sinf( angleOutlineEllipse) + 1.0f };
+	g_IsFullyCharged |= angle <= (g_Pi / 2.0f);
 
-	float radiusBig{ 20.0f * combinedSine };
-	float radiusSmall{ 17.5f * sineFilledEllipse };
-	Ellipsef innerRadius{ mousePos, radiusBig, radiusBig };
-	Ellipsef chargeVfx{ mousePos, radiusSmall, radiusSmall };
+	const float warmupSine{ sinf(angle) + 1.0f};
+	const float chargedSine{ (sinf(5.0f * angle) + 5.0f) / 5.0f };
+	const Ellipsef ellipseChargeVFX
+	{
+		g_MousePos,
+		radius * (g_IsFullyCharged ? chargedSine : warmupSine),
+		radius * (g_IsFullyCharged ? chargedSine : warmupSine) 
+	};
 
 	if (g_IsCharging)
 	{
 		++g_ChargeTimer;
+
 		SetColor(0.45f, 0.25f, 0.65f);
-		DrawEllipse(innerRadius);
-		SetColor(0.65f, 0.25f, 0.45f);
-		FillEllipse(chargeVfx);
+		DrawEllipse(ellipseChargeVFX);
 	}
 }
 #pragma endregion ownDefinitions
