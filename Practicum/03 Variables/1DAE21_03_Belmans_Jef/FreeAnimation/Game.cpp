@@ -72,26 +72,36 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 #pragma region ownDefinitions
 void ChargeShot()
 {
-	const float radius{ 25.0f };
+	const float radius{ 30.0f };
 	const float angle{ (270 + g_ChargeTimer) % 360 * (g_Pi / 180.0f) };
 
 	g_IsFullyCharged |= angle <= (g_Pi / 2.0f);
 
-	const float warmupSine{ sinf(angle) + 1.0f};
+	const float warmupSine{ (sinf(angle) + 1.0f) };
 	const float chargedSine{ (sinf(5.0f * angle) + 5.0f) / 5.0f };
+	const float secondaryWarmupSine{ sinf(2.5f * angle) + 1.0f };
+	const float secondaryChargedSine{ (sinf(5.0f * angle + 1.5f) + 6.0f) / 6.0f };
 	const Ellipsef ellipseChargeVFX
 	{
 		g_MousePos,
-		radius * (g_IsFullyCharged ? chargedSine : warmupSine),
-		radius * (g_IsFullyCharged ? chargedSine : warmupSine) 
+		(radius / 1.75f) * (g_IsFullyCharged ? chargedSine : warmupSine),
+		(radius / 1.75f) * (g_IsFullyCharged ? chargedSine : warmupSine) 
+	};
+	const Ellipsef secondaryEllipseVFX
+	{
+		g_MousePos,
+		radius * (g_IsFullyCharged ? secondaryChargedSine : secondaryWarmupSine),
+		radius * (g_IsFullyCharged ? secondaryChargedSine : secondaryWarmupSine)
 	};
 
 	if (g_IsCharging)
 	{
 		++g_ChargeTimer;
 
-		SetColor(0.45f, 0.25f, 0.65f);
+		SetColor(0.8f, 0.25f, 0.8f);
 		DrawEllipse(ellipseChargeVFX);
+		SetColor(0.8f, 0.8f, 0.0f);
+		DrawEllipse(secondaryEllipseVFX);
 	}
 }
 #pragma endregion ownDefinitions
