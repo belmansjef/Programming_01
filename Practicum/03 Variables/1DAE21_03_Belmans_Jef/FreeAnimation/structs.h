@@ -19,6 +19,13 @@ struct Point2f
 
 	float x;
 	float y;
+
+	Point2f operator= (const Point2f& a)
+	{
+		x = a.x;
+		y = a.y;
+		return a;
+	}
 };
 
 

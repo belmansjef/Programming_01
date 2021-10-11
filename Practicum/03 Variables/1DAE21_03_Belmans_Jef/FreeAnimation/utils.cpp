@@ -495,4 +495,16 @@ namespace utils
 
 
 #pragma endregion CollisionFunctionality
+
+#pragma region CustomMethods
+	float RandomRange(float min, float max)
+	{
+		return float((rand() % (int((max-min) * 100) + 1) + int(min * 100)) / 100.0f);
+	}
+
+	float RandomRange(int min, int max)
+	{
+		return RandomRange(float(min), float(max));
+	}
+#pragma endregion CustomMethods
 }

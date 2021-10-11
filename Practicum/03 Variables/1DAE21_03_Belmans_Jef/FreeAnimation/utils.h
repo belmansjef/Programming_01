@@ -73,4 +73,8 @@ namespace utils
 
 #pragma endregion CollisionFunctionality
 
+#pragma region CustomMethods
+	float RandomRange(float min, float max);
+	float RandomRange(int min, int max);
+#pragma endregion CustomMethods
 }
