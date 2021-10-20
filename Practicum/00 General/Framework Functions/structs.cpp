@@ -25,6 +25,24 @@ Point2f::Point2f( float x, float y )
 }
 
 //-----------------------------------------------------------------
+// Line4f Constructors
+//-----------------------------------------------------------------
+Line4f::Line4f()
+	:Line4f {0.0f, 0.0f, 0.0f, 0.0f}
+{
+}
+
+Line4f::Line4f(float x1, float y1, float x2, float y2)
+	:Line4f{Point2f(x1, y1), Point2f(x2, y2)}
+{
+}
+
+Line4f::Line4f(Point2f p1, Point2f p2)
+	:p1{ p1 }, p2{ p2 }
+{
+}
+
+//-----------------------------------------------------------------
 // Rectf Constructors
 //-----------------------------------------------------------------
 Rectf::Rectf( )
@@ -83,15 +101,14 @@ Ellipsef::Ellipsef( )
 {
 }
 
-
-Ellipsef::Ellipsef( const Point2f& center, float radiusX, float radiusY )
-	: center{ center }
-	, radiusX{ radiusX }
-	, radiusY{ radiusY }
+Ellipsef::Ellipsef( float centerX, float centerY, float radiusX, float radiusY )
+	: Ellipsef{ Point2f{ centerX, centerY }, radiusX, radiusY }
 {
 }
 
-Ellipsef::Ellipsef( float centerX, float centerY, float radiusX, float radiusY )
-	: Ellipsef{ Point2f{ centerX, centerY }, radiusX, radiusY }
+Ellipsef::Ellipsef(const Point2f& center, float radiusX, float radiusY)
+	: center{ center }
+	, radiusX{ radiusX }
+	, radiusY{ radiusY }
 {
 }

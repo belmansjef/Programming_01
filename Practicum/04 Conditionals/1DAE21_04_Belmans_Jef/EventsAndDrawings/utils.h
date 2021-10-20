@@ -76,5 +76,6 @@ namespace utils
 #pragma region OwnFunctions
 	float GenerateRandomNumber(float min, float max);
 	float GenerateRandomNumber(int min, int max);
+	void DrawLine4f(Line4f& line);
 #pragma endregion OwnFunctions
 }

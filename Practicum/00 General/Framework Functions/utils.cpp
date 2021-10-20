@@ -506,5 +506,10 @@ namespace utils
 	{
 		return GenerateRandomNumber(float(min), float(max));
 	}
+
+	void DrawLine4f(Line4f& line)
+	{
+		DrawLine(line.p1, line.p2, 1.0f);
+	}
 #pragma endregion OwnFunctions 
 }

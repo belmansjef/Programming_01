@@ -9,13 +9,15 @@ void Start()
 
 void Draw()
 {
-	ClearBackground();
+	ClearBackground(0.2f, 0.2f, 0.5f);
 	DrawClickRect();
+	DrawBouncingLine();
 }
 
 void Update(float elapsedSec)
 {
 	MoveClickRect();
+	UpdateBouncingLine();
 }
 
 void End()
@@ -36,6 +38,9 @@ void OnKeyUpEvent(SDL_Keycode key)
 	{
 	case SDLK_r:
 		g_IsRectMoving = !g_IsRectMoving;
+		break;
+	case SDLK_l :
+		g_IsLineEnabled = !g_IsLineEnabled;
 		break;
 	default:
 		break;
@@ -142,6 +147,41 @@ void MoveClickRect()
 		{
 			g_ExtraRect = Rectf{};
 		}
+	}
+}
+void DrawBouncingLine()
+{
+	if (!g_IsLineEnabled) return;
+
+	SetColor(1.0f, 1.0f, 0.0f);
+	DrawLine4f(g_BouncingLine);
+}
+
+// Note: there are a thousand better ways to tackle this moving line, but I am lazy rn so am taking the easy route
+void UpdateBouncingLine()
+{
+	if (!g_IsLineEnabled) return;
+
+	g_BouncingLine.p1.x += g_MovementP1.x;
+	g_BouncingLine.p1.y += g_MovementP1.y;
+
+	g_BouncingLine.p2.x += g_MovementP2.x;
+	g_BouncingLine.p2.y += g_MovementP2.y;
+
+	CheckIfOutOfBound(g_BouncingLine.p1, g_MovementP1);
+	CheckIfOutOfBound(g_BouncingLine.p2, g_MovementP2);
+}
+
+void CheckIfOutOfBound(Point2f p, Point2f& movement)
+{
+	if (p.x <= 0.0f || p.x >= g_WindowWidth)
+	{
+		movement.x = -movement.x;
+	}
+	
+	if (p.y <= 0.0f || p.y >= g_WindowHeight)
+	{
+		movement.y = -movement.y;
 	}
 }
 #pragma endregion ownDefinitions

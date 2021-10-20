@@ -21,7 +21,15 @@ struct Point2f
 	float y;
 };
 
+struct Line4f
+{
+	Line4f( );
+	explicit Line4f(Point2f p1, Point2f p2);
+	explicit Line4f(float x1, float y1, float x2, float y2);
 
+	Point2f p1;
+	Point2f p2;
+};
 
 struct Rectf
 {
