@@ -21,11 +21,15 @@ enum class RectangleState
 
 Rectf GenerateRandomRect(float minWidth, float minHeight, float padding);
 
+bool g_IsRectMoving{ false };
+
 RectangleState g_RectState{ RectangleState::idle };
 Rectf g_Rect{ GenerateRandomRect(60.0f, 40.0f, 50.0f) };
+Rectf g_ExtraRect{ };
 
 void DrawClickRect();
 void ProcessMouseInput(int mouseX, int mouseY);
+void MoveClickRect();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
