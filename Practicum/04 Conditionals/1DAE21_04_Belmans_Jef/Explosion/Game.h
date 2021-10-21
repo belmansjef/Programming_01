@@ -3,19 +3,32 @@ using namespace utils;
 using namespace std;
 #pragma region gameInformation
 // Set your name and group in the title here
-std::string g_WindowTitle{ "SDL Events - Belmans, Jef - 1DAE21" };
+std::string g_WindowTitle{ "Explosion - Belmans, Jef - 1DAE21" };
 
 // Change the window dimensions here
 float g_WindowWidth{ 500 };
-float g_WindowHeight{ 300 };
+float g_WindowHeight{ 500 };
 #pragma endregion gameInformation
 
 
 
 #pragma region ownDeclarations
-Point2f g_MousePos{};
+enum class BombState
+{
+	ticking,
+	exploding
+};
 
-void DrawMouseSquare();
+float bombSize{ 100.0f };
+
+BombState g_CurrentState{ BombState::ticking };
+
+Rectf g_Bomb{ (g_WindowWidth / 2.0f) - bombSize / 2.0f, (g_WindowHeight / 2.0f) - bombSize / 2.0f, bombSize, bombSize };
+Rectf g_Explosion[4]{};
+
+void ProcessMouseClick(Point2f mousePos);
+void UpdateExplosion();
+void DrawExplosion();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											

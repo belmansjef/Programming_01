@@ -3,7 +3,7 @@ using namespace utils;
 using namespace std;
 #pragma region gameInformation
 // Set your name and group in the title here
-std::string g_WindowTitle{ "FlowControl Basics - Belmans, Jef - 1DAE21" };
+std::string g_WindowTitle{ "Flow Control Basics - Belmans, Jef - 1DAE21" };
 
 // Change the window dimensions here
 float g_WindowWidth{ 500 };
