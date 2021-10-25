@@ -2,7 +2,7 @@
 using namespace utils;
 #pragma region gameInformation
 // Set your name and group in the title here
-std::string g_WindowTitle{ "Project name - Name, firstname - 1DAExx" };
+std::string g_WindowTitle{ "Curves - Belmans, Jef - 1DAE21" };
 
 // Change the window dimensions here
 float g_WindowWidth{ 500 };
@@ -12,10 +12,8 @@ float g_WindowHeight{ 300 };
 
 
 #pragma region ownDeclarations
-// Declare your own global variables here
-
-// Declare your own functions here
-
+void DrawOctagon();
+void DrawCrosier();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
