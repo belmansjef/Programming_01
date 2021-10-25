@@ -76,11 +76,6 @@ namespace utils
 #pragma region OwnFunctions
 	float GenerateRandomNumber(float min, float max);
 	float GenerateRandomNumber(int min, int max);
-
-	Rectf GenerateRandomRectf(float windowWidth, float windowHeight, float border, float minWidth, float minHeight);
-
-	Color4f GenerateRandomColor4f();
-
 	void DrawLine4f(Line4f& line);
 #pragma endregion OwnFunctions
 }

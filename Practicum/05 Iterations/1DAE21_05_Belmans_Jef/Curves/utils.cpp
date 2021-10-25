@@ -507,29 +507,6 @@ namespace utils
 		return GenerateRandomNumber(float(min), float(max));
 	}
 
-
-	Rectf GenerateRandomRectf(float windowWidth, float windowHeight, float border, float minWidth, float minHeight)
-	{
-		float left{ GenerateRandomNumber(border, windowWidth - border) };
-		float bottom{ GenerateRandomNumber(border, windowHeight - border) };
-
-		float width{ GenerateRandomNumber(minWidth, windowWidth - border - left) };
-		float height{GenerateRandomNumber(minHeight, windowHeight - border - bottom) };
-
-		return Rectf
-		(
-			left,
-			bottom,
-			width,
-			height
-		);
-	}
-
-	Color4f GenerateRandomColor4f()
-	{
-		return Color4f(GenerateRandomNumber(0.0f, 1.0f), GenerateRandomNumber(0.0f, 1.0f), GenerateRandomNumber(0.0f, 1.0f), 1.0f);
-	}
-
 	void DrawLine4f(Line4f& line)
 	{
 		DrawLine(line.p1, line.p2, 1.0f);
