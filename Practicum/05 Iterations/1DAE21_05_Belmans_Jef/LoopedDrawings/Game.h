@@ -11,7 +11,10 @@ float g_WindowHeight{ 500 };
 
 
 #pragma region ownDeclarations
-
+void DrawStairs();
+void DrawSpinningLines();
+void DrawSquares();
+void DrawSpiral();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
