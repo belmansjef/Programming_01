@@ -150,7 +150,7 @@ void DrawSpinningLines()
 				DrawLine(p1, p2);
 				break;
 			case 2:
-				SetColor(0.2f, 0.8f, 0.8f);
+				SetColor(0.2f, 0.2f, 0.8f);
 				p1.x = startPos.x + columnWidth - ((columnWidth / nrLinesPerSet) * y);
 				p1.y = startPos.y + rowHeight;
 
@@ -189,18 +189,40 @@ void DrawSquares()
 		10.0f
 	};
 
+	SetColor(0.2f, 0.8f, 0.2f);
 	for (int i = 0; i < nrSquares; i++)
 	{
-		Point2f p1
-		{
-			startPos.x - (columnWidth),
+		const float offsetX{ (columnWidth / (2.0f * nrSquares)) * i };
+		const float offsetY{ (rowHeight / (2.0f * nrSquares)) * i };
 
+		const Rectf rect
+		{
+			startPos.x + offsetX,
+			startPos.y + offsetY,
+			columnWidth - (2.0f * offsetX) - 10.0f,
+			rowHeight - (2.0f * offsetY) - 10.0f
 		};
+
+		DrawRect(rect);
 	}
 }
 
 void DrawSpiral()
 {
+	const int nrIterations{ 5 };
+	
+	const float columnWidth{ (g_WindowWidth - 30.0f) / 2.0f };
+	const float rowHeight{ (g_WindowHeight - 30.0f) / 2.0f };
 
+	const Point2f startPos
+	{
+		20.0f + columnWidth,
+		10.0f
+	};
+
+	for (int i = 0; i < nrIterations; i++)
+	{
+		
+	}
 }
 #pragma endregion ownDefinitions
