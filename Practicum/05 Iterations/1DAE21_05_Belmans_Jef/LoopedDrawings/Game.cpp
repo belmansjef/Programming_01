@@ -35,7 +35,15 @@ void OnKeyDownEvent(SDL_Keycode key)
 
 void OnKeyUpEvent(SDL_Keycode key)
 {
-	
+	switch (key)
+	{
+	case SDLK_UP:
+		ChangeLoops(1);
+		break;
+	case SDLK_DOWN:
+		ChangeLoops(-1);
+		break;
+	}
 }
 
 void OnMouseMotionEvent(const SDL_MouseMotionEvent& e)
@@ -57,7 +65,7 @@ void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
 #pragma region ownDefinitions
 void DrawStairs()
 {
-	const int nrStairs{ 5 };
+	const int nrStairs{ g_NrLoops };
 	const float columnWidth{ (g_WindowWidth - 30.0f) / 2.0f };
 	const float rowHeight{ (g_WindowHeight - 30.0f) / 2.0f };
 
@@ -109,7 +117,7 @@ void DrawStairs()
 
 void DrawSpinningLines()
 {
-	const int nrLinesPerSet{ 5 };
+	const int nrLinesPerSet{ g_NrLoops };
 	
 	const float columnWidth{ (g_WindowWidth - 30.0f) / 2.0f };
 	const float rowHeight{ (g_WindowHeight - 30.0f) / 2.0f };
@@ -178,7 +186,7 @@ void DrawSpinningLines()
 
 void DrawSquares()
 {
-	const int nrSquares{ 5 };
+	const int nrSquares{ g_NrLoops };
 	
 	const float columnWidth{ (g_WindowWidth - 30.0f) / 2.0f };
 	const float rowHeight{ (g_WindowHeight - 30.0f) / 2.0f };
@@ -209,7 +217,7 @@ void DrawSquares()
 
 void DrawSpiral()
 {
-	const int nrIterations{ 5 };
+	const int nrIterations{ g_NrLoops };
 	
 	const float columnWidth{ (g_WindowWidth - 30.0f) / 2.0f };
 	const float rowHeight{ (g_WindowHeight - 30.0f) / 2.0f };
@@ -222,7 +230,22 @@ void DrawSpiral()
 
 	for (int i = 0; i < nrIterations; i++)
 	{
-		
+		// Brain fart, can't figure out how to do it
+		// TODO: Ask in class
+	}
+}
+
+void ChangeLoops(int value)
+{
+	g_NrLoops += value;
+
+	if (g_NrLoops > 20)
+	{
+		g_NrLoops = 20;
+	}
+	else if (g_NrLoops < 5)
+	{
+		g_NrLoops = 5;
 	}
 }
 #pragma endregion ownDefinitions

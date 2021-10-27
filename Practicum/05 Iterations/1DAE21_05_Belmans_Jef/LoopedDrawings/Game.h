@@ -11,6 +11,10 @@ float g_WindowHeight{ 500 };
 
 
 #pragma region ownDeclarations
+int g_NrLoops{ 5 };
+
+void ChangeLoops(int value);
+
 void DrawStairs();
 void DrawSpinningLines();
 void DrawSquares();
