@@ -1,7 +1,7 @@
 #pragma once
 using namespace utils;
 #pragma region gameInformation
-std::string g_WindowTitle{ "Project name - Name, firstname - 1DAExx" };
+std::string g_WindowTitle{ "Concentric Lines - Belmans, Jef - 1DAE21" };
 
 float g_WindowWidth{ 500 };
 float g_WindowHeight{ 300 };
@@ -10,7 +10,18 @@ float g_WindowHeight{ 300 };
 
 
 #pragma region ownDeclarations
+enum class Color
+{
+	red,
+	green,
+	blue
+};
 
+Color g_Color{ Color::red };
+Point2f g_MousePos{};
+
+void DrawLines();
+void SwitchColor();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
