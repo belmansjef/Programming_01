@@ -19,17 +19,24 @@ void Draw()
 
 	#pragma region Triangles
 	SetColor(1.0f, 0.2f, 0.2f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f ) + 20.0f, g_WindowHeight - 90.0f), 80.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f ) + 20.0f, g_WindowHeight - 90.0f), 80.0f, true);
 	SetColor(0.2f, 1.0f, 0.2f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 30.0f, g_WindowHeight - 82.5f), 60.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 30.0f, g_WindowHeight - 82.5f), 60.0f, true);
 	SetColor(0.2f, 0.2f, 1.0f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 40.0f, g_WindowHeight - 75.0f), 40.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 40.0f, g_WindowHeight - 75.0f), 40.0f, true);
 	SetColor(0.0f, 1.0f, 1.0f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 110.0f, g_WindowHeight - 90.0f), 40.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 110.0f, g_WindowHeight - 90.0f), 40.0f, true);
 	SetColor(1.0f, 0.0f, 1.0f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 130.0f, g_WindowHeight - 55.0f), 40.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 130.0f, g_WindowHeight - 55.0f), 40.0f, true);
 	SetColor(1.0f, 1.0f, 0.0f);
-	DrawEauilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 150.0f, g_WindowHeight - 90.0f), 40.0f, true);
+	DrawEquilateralTriangle(Point2f((g_WindowWidth / 2.0f) + 150.0f, g_WindowHeight - 90.0f), 40.0f, true);
+	#pragma endregion
+
+	#pragma region Pentagrams
+	SetColor(1.0f, 0.2f, 0.2f);
+	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 60.0f, g_WindowHeight - 160.0f), 80.0f);
+	SetColor(0.2f, 0.2f, 1.0f);
+	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 150.0f, g_WindowHeight - 160.0f), 60.0f);
 	#pragma endregion
 
 }
@@ -91,19 +98,5 @@ void DrawSquares(const Point2f& pos, const float size, const int numSquares)
 
 		DrawRect(rect);
 	}
-}
-
-void DrawEauilateralTriangle(const Point2f vert1, const float size, const bool isFilled)
-{
-	const Point2f vert2{ vert1.x + cosf(1.0472f) * size, vert1.y + sinf(1.0472f) * size};
-	const Point2f vert3{ vert1.x +  size, vert1.y };
-
-	if (isFilled)
-	{
-		FillTriangle(vert1, vert2, vert3);
-	}
-	SetColor(0.0f, 0.0f, 0.0f);
-	DrawTriangle(vert1, vert2, vert3);
-	
 }
 #pragma endregion ownDefinitions

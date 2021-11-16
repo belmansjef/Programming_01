@@ -534,5 +534,36 @@ namespace utils
 	{
 		DrawLine(line.p1, line.p2, 1.0f);
 	}
+
+	void DrawPentagram(const Point2f& center, const float radius)
+	{
+		const float deltaAngle{ (360.0f / 5.0f) * (g_Pi / 180.0f) };
+
+		for (int i = 0; i < 5; i++)
+		{
+			Point2f p1{ center.x + (cosf(deltaAngle * i) * (radius / 2.0f)), center.y + (sinf(deltaAngle * i) * (radius / 2.0f)) };
+			Point2f p2{ center.x + (cosf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f), center.y + (sinf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f) };
+
+			DrawLine(p1, p2);
+		}
+	}
+
+	void DrawEquilateralTriangle(const Point2f& vert1, const float size, const bool isFilled)
+	{
+		const Point2f vert2{ vert1.x + cosf(1.0472f) * size, vert1.y + sinf(1.0472f) * size };
+		const Point2f vert3{ vert1.x + size, vert1.y };
+
+		if (isFilled)
+		{
+			FillTriangle(vert1, vert2, vert3);
+		}
+		SetColor(0.0f, 0.0f, 0.0f);
+		DrawTriangle(vert1, vert2, vert3);
+
+	}
+	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& colorLeft, const Color4f& colorRight)
+	{
+
+	}
 #pragma endregion OwnFunctions 
 }

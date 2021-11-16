@@ -76,11 +76,12 @@ namespace utils
 #pragma region OwnFunctions
 	float GenerateRandomNumber(float min, float max);
 	float GenerateRandomNumber(int min, int max);
-
 	Rectf GenerateRandomRectf(float windowWidth, float windowHeight, float border, float minWidth, float minHeight);
-
 	Color4f GenerateRandomColor4f();
 
 	void DrawLine4f(Line4f& line);
+	void DrawPentagram(const Point2f& center, const float radius);
+	void DrawEquilateralTriangle(const Point2f& vert1, const float size, const bool isFilled);
+	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& colorLeft, const Color4f& colorRight);
 #pragma endregion OwnFunctions
 }

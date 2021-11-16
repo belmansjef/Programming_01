@@ -11,7 +11,6 @@ float g_WindowHeight{ 500 };
 
 #pragma region ownDeclarations
 void DrawSquares(const Point2f& pos, const float size, const int numSquares);
-void DrawEauilateralTriangle(const Point2f vert1, const float size, const bool isFilled);
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
