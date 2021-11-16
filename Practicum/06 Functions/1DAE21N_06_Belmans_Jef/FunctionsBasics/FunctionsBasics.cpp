@@ -7,7 +7,7 @@ using namespace chrono;
 
 #pragma region Debugging
 int Sum(int a, int b);
-#pragma endregion Debugging
+#pragma endregion
 
 #pragma region FunctionOverloading
 void Print(int value, char delimiter);
@@ -33,10 +33,25 @@ void TestPrintMessage();
 
 bool IsEven(int value);
 void TestIsEven();
-#pragma endregion SimpleFucntions
+
+bool IsLeapYear(int year);
+void TestIsLeapYear();
+
+int GetRand(int lower, int upper);
+void TestGetIntRand();
+
+float GetRand(float lower, float upper);
+void TestGetFloatRand();
+
+float GetDistance(float x1, float y1, float x2, float y2);
+float GetDistance(Point2f p1, Point2f p2);
+void TestGetDistance();
+#pragma endregion
 
 int main()
 {
+    srand(unsigned int(time(nullptr)));
+
     // int result{ Sum(5, 2) };
 
     // TestPrint();
@@ -46,7 +61,11 @@ int main()
     // TestPrintNumbers();
     // TestCalcElapsedTime();
     // TestPrintMessage();
-    TestIsEven();
+    // TestIsEven();
+    // TestIsLeapYear();
+    // TestGetIntRand();
+    // TestGetFloatRand();
+    // TestGetDistance();
 
     cout << endl;
     system("pause");
@@ -105,7 +124,6 @@ int Modulo(int dividend, int divisor)
 {
     return dividend - ((dividend / divisor) * divisor);
 }
-
 void PrintNumbers(int lower, int upper)
 {
     cout << "Interval [" << lower << ", " << upper << "]" << endl;
@@ -178,5 +196,88 @@ void TestIsEven()
 
     result = IsEven(num = 19169) ? "even" : "odd";
     cout << num << " is " << result << endl;
+}
+
+bool IsLeapYear(int year)
+{
+    if (Modulo(year, 4) == 0)
+    {
+        if (Modulo(year, 100) == 0)
+        {
+            return (Modulo(year, 400) == 0);
+        }
+        else
+        {
+            return true;
+        }
+    }
+    return false;
+}
+void TestIsLeapYear()
+{
+    int userInput{};
+    cout << "-- Function that checks wether year is leap --" << endl;
+
+    while (userInput != -1)
+    {
+        cout << "Year ? ";
+        cin >> userInput;
+
+        if (userInput == -1) return;
+
+        const int days{ IsLeapYear(userInput) ? 29 : 28 };
+        cout << userInput << " has " << days << " days in february" << endl;
+    }
+}
+
+int GetRand(int lower, int upper)
+{
+    return Modulo(rand(), (upper - lower) + 1) + lower;
+}
+void TestGetIntRand()
+{
+    cout << "-- Function that generates a random number in a given integer interval --" << endl;
+    cout << "In [1, 6] " << GetRand(1, 6) << endl;
+    cout << "In [10, 20] " << GetRand(10, 20) << endl;
+    cout << "In [-5, 0] " << GetRand(-5, 0) << endl;
+}
+
+float GetRand(float lower, float upper)
+{
+    return float((Modulo(rand(), (int((upper - lower) * 100) + 1)) + int(lower * 100.0f)) / 100.0f);
+}
+void TestGetFloatRand()
+{
+    cout << "-- Function that generates a random number in a given float interval --" << endl;
+    cout << "In [0, 3.14159] " << GetRand(0.0f, 3.14159f) << endl;
+    cout << "In [-2, 3] " << GetRand(-2.0f, 3.0f) << endl;
+}
+
+float GetDistance(float x1, float y1, float x2, float y2)
+{
+    return GetDistance(Point2f(x1, y1), Point2f(x2, y2));
+}
+float GetDistance(Point2f p1, Point2f p2)
+{
+    Point2f freeVector{ Point2f(p2.x - p1.x, p2.y - p1.y) };
+    
+    return sqrtf(pow(freeVector.x, 2) + pow(freeVector.y, 2));
+}
+void TestGetDistance()
+{
+    const Point2f p1{ GetRand(-100.0f, 100.0f), GetRand(-100.0f, 100.0f) };
+    const Point2f p2{ GetRand(-100.0f, 100.0f), GetRand(-100.0f, 100.0f) };
+    const Point2f p3{ GetRand(-100.0f, 100.0f), GetRand(-100.0f, 100.0f) };
+    const Point2f p4{ GetRand(-100.0f, 100.0f), GetRand(-100.0f, 100.0f) };
+
+    cout << "-- Function that calculates distance between 2 points --" << endl;
+
+    cout << "Distance between [" << p1.x << ", " << p1.y << "] and [" << p2.x << ", " << p2.y << "]" << endl;
+    cout << "Calling one version: " << GetDistance(p1, p2) << endl;
+    cout << "Calling the other version: " << GetDistance(p1.x, p1.y, p2.x, p2.y) << endl << endl;
+
+    cout << "Distance between [" << p3.x << ", " << p3.y << "] and [" << p4.x << ", " << p4.y << "]" << endl;
+    cout << "Calling one version: " << GetDistance(p3, p4) << endl;
+    cout << "Calling the other version: " << GetDistance(p3.x, p3.y, p4.x, p4.y) << endl << endl;
 }
 #pragma endregion
