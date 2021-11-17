@@ -47,7 +47,7 @@ struct Rectf
 struct Color4f
 {
 	Color4f( );
-	explicit Color4f( float r, float g, float b, float a );
+	explicit Color4f( float r, float g, float b, float a = 1.0f );
 	
 	float r;
 	float g;

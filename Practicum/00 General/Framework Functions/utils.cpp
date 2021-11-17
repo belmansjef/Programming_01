@@ -510,11 +510,11 @@ namespace utils
 
 	Rectf GenerateRandomRectf(float windowWidth, float windowHeight, float border, float minWidth, float minHeight)
 	{
-		float left{ GenerateRandomNumber(border, windowWidth - border) };
-		float bottom{ GenerateRandomNumber(border, windowHeight - border) };
+		const float left{ GenerateRandomNumber(border, windowWidth - border) };
+		const float bottom{ GenerateRandomNumber(border, windowHeight - border) };
 
-		float width{ GenerateRandomNumber(minWidth, windowWidth - border - left) };
-		float height{GenerateRandomNumber(minHeight, windowHeight - border - bottom) };
+		const float width{ GenerateRandomNumber(minWidth, windowWidth - border - left) };
+		const float height{GenerateRandomNumber(minHeight, windowHeight - border - bottom) };
 
 		return Rectf
 		(
@@ -530,9 +530,80 @@ namespace utils
 		return Color4f(GenerateRandomNumber(0.0f, 1.0f), GenerateRandomNumber(0.0f, 1.0f), GenerateRandomNumber(0.0f, 1.0f), 1.0f);
 	}
 
-	void DrawLine4f(Line4f& line)
+	void DrawLine4f(const Line4f& line)
 	{
 		DrawLine(line.p1, line.p2, 1.0f);
+	}
+
+	void DrawPentagram(const Point2f& center, const float radius)
+	{
+		const float deltaAngle{ (360.0f / 5.0f) * (g_Pi / 180.0f) };
+
+		for (int i = 0; i < 5; i++)
+		{
+			const Point2f p1{ center.x + (cosf(deltaAngle * i) * (radius / 2.0f)), center.y + (sinf(deltaAngle * i) * (radius / 2.0f)) };
+			const Point2f p2{ center.x + (cosf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f), center.y + (sinf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f) };
+
+			DrawLine(p1, p2);
+		}
+	}
+
+	void DrawEquilateralTriangle(const Point2f& vert1, const float size, const bool isFilled)
+	{
+		const Point2f vert2{ vert1.x + cosf(1.0472f) * size, vert1.y + sinf(1.0472f) * size };
+		const Point2f vert3{ vert1.x + size, vert1.y };
+
+		if (isFilled)
+		{
+			FillTriangle(vert1, vert2, vert3);
+		}
+		SetColor(0.0f, 0.0f, 0.0f);
+		DrawTriangle(vert1, vert2, vert3);
+
+	}
+
+	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& leftColor, const Color4f& rightColor)
+	{
+		const Color4f colorDifference
+		{
+			rightColor.r - leftColor.r,
+			rightColor.g - leftColor.g,
+			rightColor.b - leftColor.b,
+			rightColor.a - leftColor.a
+		};
+
+		for(int offset = 0;  offset < width; ++offset)
+		{
+			const float gradientStep{ offset / width };
+			const Color4f gradientColor
+			{
+				leftColor.r + (colorDifference.r * gradientStep),
+				leftColor.g + (colorDifference.g * gradientStep),
+				leftColor.b + (colorDifference.b * gradientStep),
+				leftColor.a + (colorDifference.a * gradientStep)
+			};
+
+			SetColor(gradientColor);
+			DrawLine(lowerLeft.x + offset, lowerLeft.y, lowerLeft.x + offset, lowerLeft.y + height);
+		}
+	}
+	void DrawDotGrid(const Point2f& lowerLeft, const float radius, const float spacing, const int rows, const int columns)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int x = 0; x < columns; x++)
+			{
+				const Ellipsef dot
+				{
+					lowerLeft.x + (x * (spacing + radius * 2.0f)),
+					lowerLeft.y + (i * (spacing + radius * 2.0f)),
+					radius,
+					radius
+				};
+
+				FillEllipse(dot);
+			}
+		}
 	}
 #pragma endregion OwnFunctions 
 }

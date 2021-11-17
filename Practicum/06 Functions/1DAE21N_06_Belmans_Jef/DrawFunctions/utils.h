@@ -79,9 +79,10 @@ namespace utils
 	Rectf GenerateRandomRectf(float windowWidth, float windowHeight, float border, float minWidth, float minHeight);
 	Color4f GenerateRandomColor4f();
 
-	void DrawLine4f(Line4f& line);
+	void DrawLine4f(const Line4f& line);
 	void DrawPentagram(const Point2f& center, const float radius);
 	void DrawEquilateralTriangle(const Point2f& vert1, const float size, const bool isFilled);
-	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& colorLeft, const Color4f& colorRight);
+	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& leftColor, const Color4f& rightColor);
+	void DrawDotGrid(const Point2f& lowerLeft, const float radius, const float spacing, const int rows, const int columns);
 #pragma endregion OwnFunctions
 }

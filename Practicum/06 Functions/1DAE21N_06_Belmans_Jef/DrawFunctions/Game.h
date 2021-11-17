@@ -4,7 +4,7 @@ using namespace utils;
 std::string g_WindowTitle{ "Draw Functions - Belmans, Jef - 1DAE21" };
 
 float g_WindowWidth{ 600 };
-float g_WindowHeight{ 500 };
+float g_WindowHeight{ 400 };
 #pragma endregion gameInformation
 
 

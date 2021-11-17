@@ -34,9 +34,25 @@ void Draw()
 
 	#pragma region Pentagrams
 	SetColor(1.0f, 0.2f, 0.2f);
-	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 60.0f, g_WindowHeight - 160.0f), 80.0f);
+	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 60.0f, g_WindowHeight - 140.0f), 80.0f);
 	SetColor(0.2f, 0.2f, 1.0f);
-	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 150.0f, g_WindowHeight - 160.0f), 60.0f);
+	DrawPentagram(Point2f((g_WindowWidth / 2.0f) + 150.0f, g_WindowHeight - 140.0f), 60.0f);
+	#pragma endregion
+
+	#pragma region LinearGradients
+	DrawLinearGradient(Point2f(10.0f, g_WindowHeight - 150.0f), 150.0f, 20.0f, Color4f(0.0f, 0.0f, 0.0f), Color4f(1.0f, 1.0f, 1.0f));
+	DrawLinearGradient(Point2f(10.0f, g_WindowHeight - 180.0f), 300.0f, 25.0f, Color4f(1.0f, 0.2f, 0.2f), Color4f(1.0f, 0.2f, 1.0f));
+	DrawLinearGradient(Point2f(10.0f, g_WindowHeight - 215.0f), 450.0f, 30.0f, Color4f(0.4f, 0.4f, 0.2f), Color4f(1.0f, 0.5f, 0.5f));
+	DrawLinearGradient(Point2f(10.0f, g_WindowHeight - 255.0f), 550.0f, 35.0f, Color4f(0.2f, 0.2f, 1.0f), Color4f(1.0f, 0.5f, 0.5f));
+	#pragma endregion
+
+	#pragma region DotGrid
+	SetColor(1.0f, 0.2f, 0.2f);
+	DrawDotGrid(Point2f(25.0f, 25.0f), 20.0f, 5.0f, 3, 5);
+	SetColor(0.2f, 1.0f, 0.2f);
+	DrawDotGrid(Point2f(265.0f, 70.0f), 20.0f, 5.0f, 2, 7);
+	SetColor(0.2f, 0.2f, 1.0f);
+	DrawDotGrid(Point2f(265.0f, 70.0f), 10.0f, 25.0f, 2, 7);
 	#pragma endregion
 
 }
