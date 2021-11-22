@@ -16,11 +16,26 @@ float g_AccumulatedTime{};
 float g_AvgFrameRate{};
 float g_AvgFrameTime{};
 
+const float g_BallRadius{ 20.0f };
+Point2f g_BallPos{ g_WindowWidth / 2.0f, g_WindowHeight / 2.0f };
+Point2f g_BallVelocity{ 100.0f, 80.0f };
+
+bool isGravityEnabled{ false };
+const float g_FreeFallSize{ 20.0f };
+float g_FreeFallTime{ 0.0f };
+Point2f g_FreeFallPos{ g_WindowWidth / 2.0f, g_WindowHeight - (g_FreeFallSize + 5.0f) };
+Point2f g_Gravity{ 0.0f, -9.81f };
+
 void UpdateNrFrames();
 void UpdateAccumulatedTime(const float deltaTime);
 void UpdateFramerate(const float deltaTime);
-
 void PrintFrameStats();
+
+void UpdateBall(const float deltaTime);
+void DrawBall();
+
+void UpdateFreeFall(const float deltaTime);
+void DrawFreeFall();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
