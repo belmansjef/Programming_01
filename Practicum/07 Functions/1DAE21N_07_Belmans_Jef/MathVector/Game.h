@@ -14,6 +14,9 @@ float g_WindowHeight{ 300 };
 const Vector2f g_MainVector{100.0f, 100.0f};
 const Vector2f g_SecondaryVector{60.0f, 20.0f};
 
+Vector2f g_ProjectionVector{ 0.0f, 0.0f };
+float g_Angle{};
+
 Vector2f Add(const Vector2f& v1, const Vector2f& v2);
 Vector2f Substract(const Vector2f& v1, const Vector2f& v2);
 Vector2f Scale(const float& scalar, const Vector2f& v1);
