@@ -5,6 +5,8 @@
 #pragma region gameFunctions											
 void Start()
 {
+	g_NormalizedVector = Normalize(Vector2f(22.5f, 12.5f));
+
 	cout << fixed << setprecision(5) << endl;
 	cout << ToString(g_MainVector) << endl;
 
@@ -52,20 +54,19 @@ void Draw()
 
 	SetColor(1.0f, 1.0f, 1.0f);
 	DrawVector(g_ProjectionVector, Point2f(g_WindowWidth / 2.0f, g_WindowHeight / 2.0f));
+	SetColor(1.0f, 0.0f, 0.0f);
+	DrawVector(g_ProjectedVector, Point2f(g_WindowWidth / 2.0f, g_WindowHeight / 2.0f));
 }
 
 void Update(float elapsedSec)
 {
-	g_Angle += elapsedSec;
-	g_ProjectionVector.x = g_ProjectionVector.x * cosf(g_Angle) - g_ProjectionVector.y * sinf(g_Angle);
-	g_ProjectionVector.y = g_ProjectionVector.x * sinf(g_Angle) + g_ProjectionVector.y * cosf(g_Angle);
-	cout << g_Angle << endl;
-	if (g_Angle >= 2.0f * g_Pi)
-	{
-		g_Angle = 0.0f;
-	}
-}
+	g_CurrentAngle += (45.0f * (g_Pi / 180.0f) * elapsedSec);
+	g_ProjectionVector.x = 50.0f * cosf(g_CurrentAngle);
+	g_ProjectionVector.y = 50.0f * sinf(g_CurrentAngle);
 
+	const float dp{ DotProduct(g_ProjectionVector, g_NormalizedVector) };
+	g_ProjectedVector = Vector2f(g_NormalizedVector.x * dp, g_NormalizedVector.y * dp);
+}
 void End()
 {
 
