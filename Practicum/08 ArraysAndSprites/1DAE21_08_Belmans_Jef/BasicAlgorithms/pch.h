@@ -10,6 +10,6 @@ void Shuffle(int* pArray, const int size, const int nrShuffles);
 void BubbleSort(int* pArray, int size, bool sortAscending = true);
 
 int GetRand(int min, int max);
-int GenerateRandomArray(const int size);
+void InitializeArray(int* pArrayToInit, const int size );
 void PrintArray(const int* pArrayToPrint, const int size);
 #endif
