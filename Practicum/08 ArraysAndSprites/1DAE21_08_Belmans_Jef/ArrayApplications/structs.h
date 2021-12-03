@@ -21,6 +21,15 @@ struct Point2f
 	float y;
 };
 
+struct AngleSpeed
+{
+	AngleSpeed();
+	explicit AngleSpeed(float angle, float speed);
+
+	float angle;
+	float speed;
+};
+
 struct Line4f
 {
 	Line4f( );
@@ -42,7 +51,6 @@ struct Rectf
 	float height;
 
 };
-
 
 struct Color4f
 {
@@ -77,5 +85,12 @@ struct Ellipsef
 	float radiusY;
 };
 
+struct Pentagramf
+{
+	Pentagramf( );
+	explicit Pentagramf(const Point2f& center, const AngleSpeed& angleSpeed, float radius);
 
-
+	Point2f center;
+	AngleSpeed angleSpeed;
+	float radius;
+};

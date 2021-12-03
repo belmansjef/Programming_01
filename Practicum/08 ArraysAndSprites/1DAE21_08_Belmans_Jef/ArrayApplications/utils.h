@@ -80,7 +80,8 @@ namespace utils
 	Color4f GenerateRandomColor4f();
 
 	void DrawLine4f(const Line4f& line);
-	void DrawPentagram(const Point2f& center, const float radius);
+	void DrawPentagram(const Pentagramf& pentagram);
+	void DrawPentagram(const Point2f& center, const AngleSpeed& angleSpeed, const float radius);
 	void DrawEquilateralTriangle(const Point2f& vert1, const float size, const bool isFilled);
 	void DrawLinearGradient(const Point2f& lowerLeft, const float width, const float height, const Color4f& leftColor, const Color4f& rightColor);
 	void DrawDotGrid(const Point2f& lowerLeft, const float radius, const float spacing, const int rows, const int columns);

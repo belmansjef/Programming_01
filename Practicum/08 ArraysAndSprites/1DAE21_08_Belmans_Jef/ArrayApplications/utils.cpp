@@ -535,14 +535,20 @@ namespace utils
 		DrawLine(line.p1, line.p2, 1.0f);
 	}
 
-	void DrawPentagram(const Point2f& center, const float radius)
+	void DrawPentagram(const Pentagramf& pentagram)
 	{
-		const float deltaAngle{ (360.0f / 5.0f) * (g_Pi / 180.0f) };
+		DrawPentagram(pentagram.center, pentagram.angleSpeed, pentagram.radius);
+	}
+
+	void DrawPentagram(const Point2f& center, const AngleSpeed& angleSpeed, const float radius)
+	{
+		const float deltaAngle{ ((360.0f / 5.0f) * (g_Pi / 180.0f)) };
+		const float currentAngle{ angleSpeed.angle * (g_Pi / 180.0f) };
 
 		for (int i = 0; i < 5; i++)
 		{
-			const Point2f p1{ center.x + (cosf(deltaAngle * i) * (radius / 2.0f)), center.y + (sinf(deltaAngle * i) * (radius / 2.0f)) };
-			const Point2f p2{ center.x + (cosf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f), center.y + (sinf((deltaAngle * i) + deltaAngle * 2.0f) * radius / 2.0f) };
+			const Point2f p1{ center.x + (cosf(deltaAngle * i + currentAngle) * (radius / 2.0f)), center.y + (sinf(deltaAngle * i + currentAngle) * (radius / 2.0f)) };
+			const Point2f p2{ center.x + (cosf((deltaAngle * i + currentAngle) + deltaAngle * 2.0f) * radius / 2.0f), center.y + (sinf((deltaAngle * i + currentAngle) + deltaAngle * 2.0f) * radius / 2.0f) };
 
 			DrawLine(p1, p2);
 		}

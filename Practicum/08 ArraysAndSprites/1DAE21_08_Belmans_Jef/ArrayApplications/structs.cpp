@@ -25,6 +25,19 @@ Point2f::Point2f( float x, float y )
 }
 
 //-----------------------------------------------------------------
+// AngleSpeed Constructors
+//-----------------------------------------------------------------
+AngleSpeed::AngleSpeed()
+	:AngleSpeed{ 0.0f, 0.0f }
+{
+}
+
+AngleSpeed::AngleSpeed(float angle, float speed)
+	: angle{ angle }, speed{ speed }
+{
+}
+
+//-----------------------------------------------------------------
 // Line4f Constructors
 //-----------------------------------------------------------------
 Line4f::Line4f()
@@ -110,5 +123,20 @@ Ellipsef::Ellipsef(const Point2f& center, float radiusX, float radiusY)
 	: center{ center }
 	, radiusX{ radiusX }
 	, radiusY{ radiusY }
+{
+}
+
+//-----------------------------------------------------------------
+// Ellipsef Constructors
+//-----------------------------------------------------------------
+Pentagramf::Pentagramf()
+	:Pentagramf{ Point2f(0.0f, 0.0f), AngleSpeed(0.0f, 1.0f), 0.0f }
+{
+}
+
+Pentagramf::Pentagramf(const Point2f& center, const AngleSpeed& angleSpeed, float radius)
+	: center{center}
+	, angleSpeed{ angleSpeed }
+	, radius{ radius }
 {
 }
