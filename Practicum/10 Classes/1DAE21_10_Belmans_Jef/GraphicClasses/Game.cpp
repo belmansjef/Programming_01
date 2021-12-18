@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Fraction.h"
 #include "Light.h"
+#include "DaeEllipse.h"
 #include <iostream>
 #include <iomanip>
 
@@ -12,6 +13,8 @@ void Start()
 	PrintFractionsSum();
 
 	InitLights();
+
+	InitEllipses();
 }
 
 void Draw()
@@ -19,6 +22,7 @@ void Draw()
 	ClearBackground(0.0f, 0.0f, 0.0f);
 	DrawFractions();
 	DrawLights();
+	DrawEllipses();
 }
 
 void Update(float elapsedSec)
@@ -30,6 +34,7 @@ void End()
 {
 	DeleteFractions();
 	DeleteLights();
+	DeleteEllipses();
 }
 #pragma endregion gameFunctions
 
@@ -51,7 +56,9 @@ void OnMouseMotionEvent(const SDL_MouseMotionEvent& e)
 
 void OnMouseDownEvent(const SDL_MouseButtonEvent& e)
 {
-	HitLights(Point2f(float(e.x), float(g_WindowHeight - e.y)));
+	const Point2f mousePos{ float(e.x), float(g_WindowHeight - e.y) };
+	HitLights(mousePos);
+	HitEllipses(mousePos);
 }
 
 void OnMouseUpEvent(const SDL_MouseButtonEvent& e)
@@ -221,5 +228,37 @@ void DeleteLights()
 	g_pLight6 = nullptr;
 	g_pLight7 = nullptr;
 	g_pLight8 = nullptr;
+}
+
+void InitEllipses()
+{
+	g_pEllipse1 = new DaeEllipse(Point2f(60.0f, g_WindowHeight - 70.0f), 40.0f, 50.0f, Color4f(1.0f, 0.0f, 0.0f));
+	g_pEllipse2 = new DaeEllipse(Point2f(320.0f, g_WindowHeight - 160.0f), 210.0f, 140.0f, Color4f(0.0f, 1.0f, 0.0f));
+	g_pEllipse3 = new DaeEllipse(Point2f(g_WindowWidth / 6.0f * 4.0f, g_WindowHeight / 2.0f), (g_WindowWidth / 4.0f) - 40.0f, (g_WindowHeight / 2.0f) - 40.0f, Color4f(1.0f, 1.0f, 0.0f));
+}
+
+void DrawEllipses()
+{
+	g_pEllipse1->Draw();
+	g_pEllipse2->Draw();
+	g_pEllipse3->Draw();
+}
+
+void HitEllipses(const Point2f& pos)
+{
+	g_pEllipse1->ActivateTest(pos);
+	g_pEllipse2->ActivateTest(pos);
+	g_pEllipse3->ActivateTest(pos);
+}
+
+void DeleteEllipses()
+{
+	delete g_pEllipse1;
+	delete g_pEllipse2;
+	delete g_pEllipse3;
+
+	g_pEllipse1 = nullptr;
+	g_pEllipse2 = nullptr;
+	g_pEllipse3 = nullptr;
 }
 #pragma endregion ownDefinitions

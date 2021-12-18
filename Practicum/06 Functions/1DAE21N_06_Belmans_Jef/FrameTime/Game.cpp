@@ -93,7 +93,6 @@ void UpdateFramerate(const float deltaTime)
 		g_AvgFrameRate = 1.0f / (g_AvgFrameTime / 100.0f);
 		g_AvgFrameTime = 0.0f;
 	}
-	
 }
 
 void PrintFrameStats()

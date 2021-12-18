@@ -12,6 +12,7 @@ float g_WindowHeight{ 720 };
 #pragma region ownDeclarations
 class Fraction;
 class Light;
+class DaeEllipse;
 
 Fraction* g_pFraction1{ nullptr };
 Fraction* g_pFraction2{ nullptr };
@@ -38,6 +39,15 @@ void InitLights();
 void DrawLights();
 void HitLights(const Point2f& pos);
 void DeleteLights();
+
+DaeEllipse* g_pEllipse1{ nullptr };
+DaeEllipse* g_pEllipse2{ nullptr };
+DaeEllipse* g_pEllipse3{ nullptr };
+
+void InitEllipses();
+void DrawEllipses();
+void HitEllipses(const Point2f& pos);
+void DeleteEllipses();
 #pragma endregion ownDeclarations
 
 #pragma region gameFunctions											
